@@ -107,7 +107,7 @@ class UserController extends Controller
 
         // $users = User::with('adressDelivery')->get();
         // dump($users);
-        $posts = $user->posts()->orderBy('id', 'DESC')->take(2)->get();
+        $posts = $user->posts()->orderBy('id', 'DESC')->get();
         if($posts){
             echo "<h1>Artigos</h1><br>";
             foreach($posts as $post) {
@@ -117,6 +117,15 @@ class UserController extends Controller
             }
         }
         // dump($posts);
+
+        $comments = $user->commentsOnMyPost()->get();
+        if($comments){
+            echo "<h1>Comentários nos meus Artigos</h1><br>";
+            foreach($comments as $comment){
+                echo "Post: #{$comment->post}  User: #{$comment->user} {$comment->content}<br>";
+            }
+        }
+        // dump($comments);
     }
 
     /**
